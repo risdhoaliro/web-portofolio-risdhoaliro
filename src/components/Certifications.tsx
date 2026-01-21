@@ -325,13 +325,34 @@ const Certifications = () => {
                 </div>
               </div>
 
-              {/* PDF Viewer */}
-              <div className="flex-1 bg-gray-100 dark:bg-gray-900 min-h-[400px]">
-                <iframe
-                  src={selectedCert.pdfUrl}
+              {/* PDF Viewer / Fallback */}
+              <div className="flex-1 bg-gray-100 dark:bg-gray-900 min-h-[400px] flex flex-col">
+                {/* Try native PDF embed first */}
+                <object
+                  data={selectedCert.pdfUrl}
+                  type="application/pdf"
                   className="w-full h-[500px]"
-                  title={selectedCert.title}
-                />
+                >
+                  {/* Fallback content if PDF cannot be displayed */}
+                  <div className="flex flex-col items-center justify-center h-[500px] p-8 text-center">
+                    <FileText className="w-24 h-24 text-gray-400 mb-6" />
+                    <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                      PDF Preview Not Available
+                    </h4>
+                    <p className="text-gray-500 dark:text-gray-400 mb-6 max-w-md">
+                      Your browser doesn't support inline PDF viewing. Click the button below to view or download the certificate.
+                    </p>
+                    <a
+                      href={selectedCert.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium transition-colors"
+                    >
+                      <ExternalLink className="w-5 h-5 mr-2" />
+                      Open Certificate PDF
+                    </a>
+                  </div>
+                </object>
               </div>
 
               {/* Modal Footer */}
