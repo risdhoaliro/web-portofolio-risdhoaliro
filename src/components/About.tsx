@@ -107,14 +107,14 @@ const About = () => {
             </motion.h3>
             <div className="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
               <motion.p variants={paragraphVariants}>
-                As a Software Development Engineer in Test with over 4 years of experience, 
+                As a Software Development Engineer in Test with over 5 years of experience, 
                 I specialize in creating robust automated testing solutions that ensure 
                 product quality and reliability.
               </motion.p>
               <motion.p variants={paragraphVariants}>
                 My expertise spans across fintech and insurtech industries, where I've 
-                worked with renowned companies like PT Altech Omega Andalan, PT Adira 
-                Dinamika Multi Finance, and PT BRI Insurance.
+                worked with renowned companies like Bank Central Asia, PT Altech Omega 
+                Andalan, PT Adira Dinamika Multi Finance, and PT BRI Insurance.
               </motion.p>
               <motion.p variants={paragraphVariants}>
                 I'm passionate about continuous growth in quality assurance and automation 

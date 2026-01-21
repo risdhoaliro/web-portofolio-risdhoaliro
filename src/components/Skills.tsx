@@ -118,13 +118,6 @@ const Skills = () => {
     }
   ];
 
-  const certifications = [
-    "ISTQB Foundation Level",
-    "Agile Testing Certification", 
-    "Security Testing Professional",
-    "Robot Framework Certified"
-  ];
-
   const achievements = [
     {
       icon: <Bug className="w-8 h-8" />,
@@ -263,36 +256,6 @@ const Skills = () => {
             ))}
           </div>
         </AnimatedCard>
-
-        {/* Certifications */}
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            Certifications & Training
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium shadow-lg"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.6 + (index * 0.1) }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -2,
-                  boxShadow: "0 20px 25px -5px rgba(59, 130, 246, 0.4)"
-                }}
-              >
-                {cert}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

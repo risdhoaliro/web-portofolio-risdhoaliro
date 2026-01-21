@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { DynamicNavigation } from '../lightswind';
-import { Menu, X, Github, Mail, Linkedin, BookOpen } from 'lucide-react';
+import { Menu, X, Github, Mail, Linkedin, BookOpen, Award } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
@@ -11,6 +11,7 @@ const Header = () => {
     { id: 'about', label: 'About', href: '#about', icon: <Menu className="size-5" /> },
     { id: 'experience', label: 'Experience', href: '#experience', icon: <Github className="size-5" /> },
     { id: 'skills', label: 'Skills', href: '#skills', icon: <Mail className="size-5" /> },
+    { id: 'certifications', label: 'Certifications', href: '#certifications', icon: <Award className="size-5" /> },
     { id: 'article', label: 'Article', href: '/articles', icon: <BookOpen className="size-5" /> },
     { id: 'contact', label: 'Contact', href: '#contact', icon: <Linkedin className="size-5" /> },
   ];

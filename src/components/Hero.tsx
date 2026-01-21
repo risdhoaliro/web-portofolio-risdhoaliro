@@ -338,7 +338,7 @@ const Hero = () => {
             className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed"
             variants={itemVariants}
           >
-            Over 4 years of experience in quality assurance and automation testing. 
+            Over 5 years of experience in quality assurance and automation testing. 
             Proven expertise in developing automated testing strategies and enhancing 
             product quality through comprehensive testing methodologies.
           </motion.p>
@@ -368,7 +368,7 @@ const Hero = () => {
             <GlowButton
               variant="ghost"
               size="lg"
-              href="/resume.pdf"
+              href="/CV_Risdho_Aliro_Sambada.pdf"
               download
               icon={<Download size={20} />}
             >

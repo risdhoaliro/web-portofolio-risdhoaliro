@@ -48,7 +48,7 @@ const Contact = () => {
       icon: <Linkedin className="w-6 h-6 text-blue-700" />,
       label: "LinkedIn",
       value: "linkedin.com/in/risdhoaliro",
-      href: "https://linkedin.com/in/risdhoaliros",
+      href: "https://linkedin.com/in/risdhoaliro",
       color: "bg-blue-50 hover:bg-blue-100"
     }
   ];
