@@ -1,14 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Award, ExternalLink, X, Calendar, Building, FileText, Download, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
+import { Award, X, Calendar, Building, FileText, Download, ZoomIn, ZoomOut } from 'lucide-react';
 import { AnimatedCard, AuroraText } from '../lightswind';
 import { useInView } from 'react-intersection-observer';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import 'react-pdf/dist/esm/Page/TextLayer.css';
-
-// Set worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface Certification {
   id: number;
@@ -16,20 +10,15 @@ interface Certification {
   issuer: string;
   date: string;
   pdfUrl: string;
-  description: string;
+  imageUrl: string;
   skills: string[];
-  category: 'security' | 'csirt' | 'general';
+  category: 'security' | 'csirt';
 }
 
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
-  const [numPages, setNumPages] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [scale, setScale] = useState<number>(1);
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
+  const [zoom, setZoom] = useState(1);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const certifications: Certification[] = [
     {
@@ -37,8 +26,8 @@ const Certifications = () => {
       title: "Cybersecurity Career Starter Certification (CCSC)",
       issuer: "Cybersecurity Institute",
       date: "2024",
-      pdfUrl: "/certifications/Cybersecurity Career Starter Certification (CCSC).pdf",
-      description: "Comprehensive certification covering cybersecurity fundamentals, threat analysis, and security best practices for career starters.",
+      pdfUrl: "/certifications/ccsc.pdf",
+      imageUrl: "/certifications/images/ccsc.png",
       skills: ["Cybersecurity Fundamentals", "Threat Analysis", "Security Best Practices", "Risk Management"],
       category: 'security'
     },
@@ -47,8 +36,8 @@ const Certifications = () => {
       title: "Certified Phishing Prevention Specialist",
       issuer: "Security Training Institute",
       date: "2024",
-      pdfUrl: "/certifications/Certified Phishing Prevention Specialist.pdf",
-      description: "Specialized certification in identifying, preventing, and responding to phishing attacks and social engineering threats.",
+      pdfUrl: "/certifications/phishing-prevention.pdf",
+      imageUrl: "/certifications/images/phishing-prevention.png",
       skills: ["Phishing Detection", "Social Engineering", "Email Security", "User Awareness"],
       category: 'security'
     },
@@ -58,7 +47,7 @@ const Certifications = () => {
       issuer: "Security Academy",
       date: "2024",
       pdfUrl: "/certifications/atm_penetration_certificate.pdf",
-      description: "Advanced certification in ATM security testing, vulnerability assessment, and penetration testing methodologies.",
+      imageUrl: "/certifications/images/atm_penetration_certificate.png",
       skills: ["ATM Security", "Penetration Testing", "Vulnerability Assessment", "Hardware Security"],
       category: 'security'
     },
@@ -68,17 +57,17 @@ const Certifications = () => {
       issuer: "Code Security Institute",
       date: "2024",
       pdfUrl: "/certifications/security_code_certificate.pdf",
-      description: "Certification in secure coding practices, code review, and application security testing.",
+      imageUrl: "/certifications/images/security_code_certificate.png",
       skills: ["Secure Coding", "Code Review", "SAST/DAST", "Application Security"],
       category: 'security'
     },
     {
       id: 5,
-      title: "Aviatrix Certified Engineer – Multicloud Network Associate",
+      title: "Aviatrix Certified Engineer - Multicloud Network Associate",
       issuer: "Aviatrix",
       date: "2024",
-      pdfUrl: "/certifications/Aviatrix Certified Engineer – Multicloud Network Associate certification.pdf",
-      description: "Professional certification in multicloud networking, covering cloud architecture, network security, and cloud connectivity across AWS, Azure, and GCP.",
+      pdfUrl: "/certifications/aviatrix-multicloud.pdf",
+      imageUrl: "/certifications/images/aviatrix-multicloud.png",
       skills: ["Multicloud Networking", "Cloud Security", "AWS/Azure/GCP", "Network Architecture"],
       category: 'security'
     },
@@ -87,8 +76,8 @@ const Certifications = () => {
       title: "Certified Web Forensic Expert (CWFE)",
       issuer: "Digital Forensics Institute",
       date: "2024",
-      pdfUrl: "/certifications/ertified Web Forensic Expert (CWFE).pdf",
-      description: "Expert certification in web forensics, covering digital evidence collection, web application analysis, and forensic investigation techniques.",
+      pdfUrl: "/certifications/cwfe.pdf",
+      imageUrl: "/certifications/images/cwfe.png",
       skills: ["Web Forensics", "Digital Evidence", "Forensic Analysis", "Investigation Techniques"],
       category: 'security'
     },
@@ -97,8 +86,8 @@ const Certifications = () => {
       title: "CSIRT Provinsi Yogyakarta",
       issuer: "CSIRT Prov. Yogyakarta",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Prov Yogyakarta.pdf",
-      description: "Computer Security Incident Response Team training and certification from Yogyakarta Province.",
+      pdfUrl: "/certifications/csirt-yogyakarta.pdf",
+      imageUrl: "/certifications/images/csirt-yogyakarta.png",
       skills: ["Incident Response", "Security Monitoring", "Threat Intelligence", "CSIRT Operations"],
       category: 'csirt'
     },
@@ -107,8 +96,8 @@ const Certifications = () => {
       title: "CSIRT Universitas Airlangga",
       issuer: "Universitas Airlangga",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Universittas Airlangga.pdf",
-      description: "CSIRT certification from Airlangga University covering incident handling and response procedures.",
+      pdfUrl: "/certifications/csirt-unair.pdf",
+      imageUrl: "/certifications/images/csirt-unair.png",
       skills: ["Incident Handling", "Digital Forensics", "Malware Analysis", "Network Security"],
       category: 'csirt'
     },
@@ -117,8 +106,8 @@ const Certifications = () => {
       title: "CSIRT Universitas Negeri Yogyakarta",
       issuer: "Universitas Negeri Yogyakarta",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Universitas Negeri Yogyakarta.pdf",
-      description: "CSIRT certification from Yogyakarta State University focusing on academic institution security.",
+      pdfUrl: "/certifications/csirt-uny.pdf",
+      imageUrl: "/certifications/images/csirt-uny.png",
       skills: ["Academic Security", "Incident Response", "Security Awareness", "Policy Development"],
       category: 'csirt'
     },
@@ -127,8 +116,8 @@ const Certifications = () => {
       title: "CSIRT Kulon Progo",
       issuer: "Pemerintah Kulon Progo",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Kulon Progo.pdf",
-      description: "Regional CSIRT certification from Kulon Progo government for cybersecurity incident response.",
+      pdfUrl: "/certifications/csirt-kulon-progo.pdf",
+      imageUrl: "/certifications/images/csirt-kulon-progo.png",
       skills: ["Government Security", "Incident Response", "Cyber Defense", "Security Operations"],
       category: 'csirt'
     },
@@ -137,8 +126,8 @@ const Certifications = () => {
       title: "CSIRT Banyuwangi",
       issuer: "Pemerintah Banyuwangi",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Banyuwangi.pdf",
-      description: "Regional CSIRT certification from Banyuwangi government for cybersecurity operations.",
+      pdfUrl: "/certifications/csirt-banyuwangi.pdf",
+      imageUrl: "/certifications/images/csirt-banyuwangi.png",
       skills: ["Regional Security", "Incident Management", "Threat Response", "Security Coordination"],
       category: 'csirt'
     },
@@ -147,8 +136,8 @@ const Certifications = () => {
       title: "CSIRT Cimahi",
       issuer: "Pemerintah Kota Cimahi",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Cimahi.pdf",
-      description: "Municipal CSIRT certification from Cimahi City for local government cybersecurity.",
+      pdfUrl: "/certifications/csirt-cimahi.pdf",
+      imageUrl: "/certifications/images/csirt-cimahi.png",
       skills: ["Municipal Security", "Incident Response", "Security Monitoring", "Cyber Resilience"],
       category: 'csirt'
     },
@@ -157,8 +146,8 @@ const Certifications = () => {
       title: "CSIRT Magelang",
       issuer: "Pemerintah Magelang",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Magelang.pdf",
-      description: "Regional CSIRT certification from Magelang for government cybersecurity operations.",
+      pdfUrl: "/certifications/csirt-magelang.pdf",
+      imageUrl: "/certifications/images/csirt-magelang.png",
       skills: ["Government Cybersecurity", "Incident Handling", "Security Assessment", "Risk Mitigation"],
       category: 'csirt'
     },
@@ -167,8 +156,8 @@ const Certifications = () => {
       title: "CSIRT Wonosobo",
       issuer: "Pemerintah Wonosobo",
       date: "2024",
-      pdfUrl: "/certifications/CSIRT Wonosobo.pdf",
-      description: "Regional CSIRT certification from Wonosobo for local cybersecurity incident response.",
+      pdfUrl: "/certifications/csirt-wonosobo.pdf",
+      imageUrl: "/certifications/images/csirt-wonosobo.png",
       skills: ["Local Government Security", "Incident Response", "Security Operations", "Threat Management"],
       category: 'csirt'
     },
@@ -177,8 +166,8 @@ const Certifications = () => {
       title: "CSIRT Bantaeng",
       issuer: "Pemerintah Bantaeng",
       date: "2024",
-      pdfUrl: "/certifications/Certificate of Appreciation from CSIRT Bantaeng.pdf",
-      description: "Certificate of Appreciation from CSIRT Bantaeng for contribution to regional cybersecurity.",
+      pdfUrl: "/certifications/csirt-bantaeng.pdf",
+      imageUrl: "/certifications/images/csirt-bantaeng.png",
       skills: ["Regional Security", "Incident Response", "Security Collaboration", "Cyber Defense"],
       category: 'csirt'
     }
@@ -186,41 +175,23 @@ const Certifications = () => {
 
   const openModal = (cert: Certification) => {
     setSelectedCert(cert);
-    setPageNumber(1);
-    setScale(1);
+    setZoom(1);
     document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setSelectedCert(null);
-    setNumPages(0);
     document.body.style.overflow = 'unset';
   };
 
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    setNumPages(numPages);
-  };
-
   const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'security':
-        return 'from-red-400 to-orange-500';
-      case 'csirt':
-        return 'from-blue-400 to-cyan-500';
-      default:
-        return 'from-amber-400 to-orange-500';
-    }
+    return category === 'security' ? 'from-red-400 to-orange-500' : 'from-blue-400 to-cyan-500';
   };
 
   const getCategoryBadge = (category: string) => {
-    switch (category) {
-      case 'security':
-        return { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-300', label: 'Security' };
-      case 'csirt':
-        return { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', label: 'CSIRT' };
-      default:
-        return { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-300', label: 'General' };
-    }
+    return category === 'security' 
+      ? { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-300', label: 'Security' }
+      : { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', label: 'CSIRT' };
   };
 
   const securityCerts = certifications.filter(c => c.category === 'security');
@@ -229,12 +200,7 @@ const Certifications = () => {
   return (
     <section id="certifications" className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-        >
+        <motion.div className="text-center mb-16" initial={{ opacity: 0, y: -30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
           <motion.h2 className="text-4xl font-bold mb-4">
             <AuroraText size="4xl" speed={6} colors={['#f59e0b', '#eab308', '#84cc16', '#22c55e', '#f59e0b']}>
               Certifications
@@ -271,93 +237,57 @@ const Certifications = () => {
         </div>
       </div>
 
-      {/* PDF Modal */}
+      {/* Image Modal */}
       <AnimatePresence>
         {selectedCert && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/90"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeModal}
           >
             <motion.div
-              className="bg-white dark:bg-gray-800 rounded-2xl max-w-5xl w-full max-h-[95vh] overflow-hidden shadow-2xl flex flex-col"
-              initial={{ scale: 0.8, opacity: 0 }}
+              className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-5xl max-h-[95vh] overflow-hidden shadow-2xl flex flex-col"
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className={`relative bg-gradient-to-br ${getCategoryColor(selectedCert.category)} p-4`}>
-                <button onClick={closeModal} className="absolute top-3 right-3 text-white/80 hover:text-white bg-black/20 rounded-full p-2">
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="flex items-center gap-3 pr-12">
-                  <Award className="w-8 h-8 text-white" />
-                  <div>
-                    <h3 className="text-lg font-bold text-white line-clamp-1">{selectedCert.title}</h3>
-                    <p className="text-white/80 text-sm">{selectedCert.issuer} • {selectedCert.date}</p>
+              <div className={`bg-gradient-to-br ${getCategoryColor(selectedCert.category)} p-3 flex items-center justify-between`}>
+                <div className="flex items-center gap-3 flex-1 min-w-0 pr-4">
+                  <Award className="w-6 h-6 text-white flex-shrink-0" />
+                  <div className="min-w-0">
+                    <h3 className="text-sm sm:text-base font-bold text-white truncate">{selectedCert.title}</h3>
+                    <p className="text-white/80 text-xs">{selectedCert.issuer} • {selectedCert.date}</p>
                   </div>
+                </div>
+                <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+                  <button onClick={() => setZoom(z => Math.max(0.5, z - 0.25))} className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-full text-white" title="Zoom Out">
+                    <ZoomOut className="w-4 h-4" />
+                  </button>
+                  <span className="text-white text-xs min-w-[40px] text-center">{Math.round(zoom * 100)}%</span>
+                  <button onClick={() => setZoom(z => Math.min(3, z + 0.25))} className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-full text-white" title="Zoom In">
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+                  <a href={selectedCert.pdfUrl} download className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-full text-white" title="Download PDF">
+                    <Download className="w-4 h-4" />
+                  </a>
+                  <button onClick={closeModal} className="p-1.5 sm:p-2 bg-white/20 hover:bg-white/30 rounded-full text-white">
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
 
-              {/* PDF Viewer */}
-              <div className="flex-1 overflow-auto bg-gray-200 dark:bg-gray-900 flex justify-center p-4">
-                <Document
-                  file={selectedCert.pdfUrl}
-                  onLoadSuccess={onDocumentLoadSuccess}
-                  loading={
-                    <div className="flex items-center justify-center h-96">
-                      <div className="animate-spin rounded-full h-12 w-12 border-4 border-amber-500 border-t-transparent"></div>
-                    </div>
-                  }
-                  error={
-                    <div className="flex flex-col items-center justify-center h-96 text-center p-8">
-                      <FileText className="w-16 h-16 text-gray-400 mb-4" />
-                      <p className="text-gray-600 dark:text-gray-400 mb-4">Unable to load PDF preview</p>
-                      <a href={selectedCert.pdfUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-amber-500 text-white rounded-lg">
-                        Open PDF Directly
-                      </a>
-                    </div>
-                  }
-                >
-                  <Page pageNumber={pageNumber} scale={scale} renderTextLayer={false} renderAnnotationLayer={false} />
-                </Document>
-              </div>
-
-              {/* Controls */}
-              <div className="p-3 border-t border-gray-200 dark:border-gray-700 flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-gray-800">
-                <div className="flex items-center gap-2">
-                  <button onClick={() => setScale(s => Math.max(0.5, s - 0.25))} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Zoom Out">
-                    <ZoomOut className="w-5 h-5" />
-                  </button>
-                  <span className="text-sm text-gray-600 dark:text-gray-400 min-w-[60px] text-center">{Math.round(scale * 100)}%</span>
-                  <button onClick={() => setScale(s => Math.min(2, s + 0.25))} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg" title="Zoom In">
-                    <ZoomIn className="w-5 h-5" />
-                  </button>
-                </div>
-
-                {numPages > 1 && (
-                  <div className="flex items-center gap-2">
-                    <button onClick={() => setPageNumber(p => Math.max(1, p - 1))} disabled={pageNumber <= 1} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg disabled:opacity-50">
-                      <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">{pageNumber} / {numPages}</span>
-                    <button onClick={() => setPageNumber(p => Math.min(numPages, p + 1))} disabled={pageNumber >= numPages} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg disabled:opacity-50">
-                      <ChevronRight className="w-5 h-5" />
-                    </button>
-                  </div>
-                )}
-
-                <div className="flex gap-2">
-                  <a href={selectedCert.pdfUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-lg text-sm">
-                    <ExternalLink className="w-4 h-4 mr-1" /> Open
-                  </a>
-                  <a href={selectedCert.pdfUrl} download className="inline-flex items-center px-3 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg text-sm">
-                    <Download className="w-4 h-4 mr-1" /> Download
-                  </a>
-                </div>
+              {/* Image Viewer */}
+              <div className="flex-1 overflow-auto bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
+                <img
+                  src={selectedCert.imageUrl}
+                  alt={selectedCert.title}
+                  className="max-w-full h-auto shadow-lg rounded transition-transform duration-200"
+                  style={{ transform: `scale(${zoom})`, transformOrigin: 'center center' }}
+                />
               </div>
             </motion.div>
           </motion.div>
