@@ -3,15 +3,33 @@ import { Calendar, MapPin, ChevronRight } from 'lucide-react';
 const Experience = () => {
   const experiences = [
     {
-      title: "Mid QA Engineer",
-      company: "Synapsis",
+      title: "Penetration Tester L2",
+      company: "Bank Central Asia",
+      period: "Oct 2025 - Present",
+      location: "Jakarta, Indonesia",
+      project: "Nearon & Driver Monitoring System",
+      achievements: [
+        "Assess network and configuration (servers, WAF, proxies, segmentation)",
+        "Test web, mobile, and APIs against OWASP/MASVS/API Top 10",
+        "Validate severity (CVSS), document evidence, and deliver clear reports",
+        "Plan scope and Rules of Engagement, execute tests, and perform re-tests",
+        "Collaborate with Dev/QA/SOC/Risk to triage and mitigate findings",
+        "Uphold data confidentiality and comply with OJK/BI, NIST 800-115, ISO 27001"
+      ],
+      color: "bg-blue-600"
+    },
+    {
+      title: "Solution QA Engineer",
+      company: "PT Synapsis Sinergi Digital",
       period: "Mar 2025 - Present",
-      location: "Yogyakarta, Indonesia",
+      location: "Jakarta, Indonesia",
+      project: "Nearon & Driver Monitoring System",
       achievements: [
         "Enhanced positive and negative test case coverage for comprehensive product validation",
         "Improved UI automation testing using Playwright, increasing test efficiency and reliability",
         "Developed and optimized API automation scripts with Playwright for backend validation",
-        "Provided performance testing consultation using K6 with Grafana monitoring",
+        "Provided performance testing consultation using K6 with Grafana or Portainer monitoring",
+        "Conducted manual testing on databases and APIs to identify issues early",
         "Upgraded CI pipelines for Nearon and Driver Monitoring System products",
         "Increased automation test success rate from 50% to 99.5%–100%",
         "Performed Functional, Smoke, Sanity, Compatibility, and Exploratory testing"
@@ -19,83 +37,88 @@ const Experience = () => {
       color: "bg-blue-500"
     },
     {
-      title: "SDET Lead",
+      title: "Lead Software Development Engineer in Test",
       company: "PT Altech Omega Andalan",
-      period: "Oct 2023 - Apr 2025",
+      period: "Nov 2023 - Apr 2025",
       location: "Jakarta, Indonesia",
-      clients: "Sweetescape, Wagginton & YAY Group",
+      project: "Sweetescape & Wagginton",
       achievements: [
-        "Created and maintained automation for Website, Android, iOS using Robot Framework",
-        "Developed and maintained API automation using Robot Framework",
-        "Conducted performance testing using K6 and security testing using Burpsuite",
-        "Performed manual API testing using Postman and Swagger",
-        "Executed SQL queries for database modification and testing",
-        "Collaborated with Product Management, Product Design, and Developer teams",
+        "Create and maintain UI automation using Robot Framework",
+        "Conforming application functionality with business requirements",
+        "Create and maintain API Testing automation using Robot Framework",
+        "Monitoring Performance Test using K6",
+        "Manual API Testing using Postman",
+        "SQL query to modify database and testing",
+        "Penetration Testing using Burpsuite",
+        "Collaborate with Product Management, Product Design, and Developer teams",
         "Participated in all development stages: Sprint planning, daily stand-ups, reviews",
-        "Created and maintained comprehensive test documentation"
+        "Create and maintain test documentation, including test cases, scripts, and reports"
       ],
       color: "bg-green-500"
     },
     {
       title: "Software Test Engineer",
-      company: "Adira Multifinance",
+      company: "PT Adira Dinamika Multi Finance",
       period: "May 2023 - Nov 2023",
       location: "Jakarta, Indonesia",
+      project: "Insurance & Adira Customer Information",
       achievements: [
-        "Executed SQL queries for database modification and testing",
-        "Implemented automation solutions using UIPath",
-        "Conducted comprehensive API testing using Postman",
-        "Managed test scenarios and bug monitoring through JIRA",
-        "Collaborated with cross-functional teams in Agile environment",
-        "Participated in Sprint planning, daily stand-ups, and retrospectives"
+        "SQL query to modify database and testing",
+        "Automation using UIPath",
+        "Handled on API Testing using Postman",
+        "Test scenario and bug monitoring JIRA",
+        "Collaborate with Product Management, Product Design, and Developer teams",
+        "Involved in all stages of development process - Sprint planning, daily stand-up, sprint review, and sprint retrospective"
       ],
       color: "bg-purple-500"
     },
     {
-      title: "QA Automation Engineer",
-      company: "BRINS",
-      period: "Mar 2023 - May 2023",
+      title: "QA Automation",
+      company: "PT BRI Insurance",
+      period: "Dec 2022 - May 2023",
       location: "Jakarta, Indonesia",
-      project: "Brins Mobile",
+      project: "PRISAI (Program Integration System Audit Intern) & TSI (Technology and Information System)",
       achievements: [
-        "Built comprehensive test cases and test scenarios",
-        "Confirmed application functionality with business requirements",
-        "Implemented automation testing using Katalon Studio",
-        "Conducted API testing using Postman",
-        "Performed security testing using Burpsuite",
-        "Participated in Sprint Planning, UAT, and Sprint Review meetings"
+        "Build Test Case, Test Scenario",
+        "Conforming application functionality with business",
+        "Automation using Katalon Studio",
+        "API Testing using Postman",
+        "Checking for security using tools Burpsuite",
+        "Sprint Planning, UAT and Sprint Review"
       ],
       color: "bg-indigo-500"
     },
     {
-      title: "QA Engineer",
-      company: "Astra Credit Companies",
-      period: "Mar 2022 - Mar 2023",
+      title: "QA Analyst & Business Analyst",
+      company: "PT Mandala Multifinance",
+      period: "Sep 2022 - Dec 2022",
       location: "Jakarta, Indonesia",
-      project: "Moxa By Astra Financial",
+      project: "Mantis By Mandala",
       achievements: [
-        "Developed test plans, case design, review, and execution",
-        "Performed comprehensive functional testing for applications",
-        "Maintained testing environment and existing testing tools",
-        "Conducted API testing with Postman",
-        "Participated in code review processes",
-        "Managed UAT & SIT testing phases"
+        "Develop plan for testing applications",
+        "Documenting support procedures for developed applications",
+        "Creating documents for testing and implementation process",
+        "Conforming application functionality with business requirements",
+        "Automation using Selenium Webdriver",
+        "API Testing with Postman",
+        "UAT, SIT & Stand Up Meeting"
       ],
       color: "bg-orange-500"
     },
     {
-      title: "Business Analyst & Quality Assurance",
-      company: "Mandala Multifinance",
-      period: "Sep 2022 - Feb 2023",
+      title: "QA Engineer",
+      company: "PT Sedaya Multi Investama (Astra Financial)",
+      period: "Feb 2021 - Dec 2022",
       location: "Jakarta, Indonesia",
-      project: "Mantis By Mandala Finance",
+      project: "Moxa By Astra Financial",
       achievements: [
-        "Developed comprehensive testing plans for applications",
-        "Documented support procedures for developed applications",
-        "Created testing and implementation process documentation",
-        "Confirmed application functionality with business requirements",
-        "Conducted API testing with Postman",
-        "Participated in UAT, SIT & Stand Up meetings"
+        "Build test plan, case design and review, case execution",
+        "Perform functional testing for application",
+        "Maintenance of testing environment and existing",
+        "Automation using Katalon Studio",
+        "API Testing using Postman",
+        "Code Review",
+        "UAT, SIT & Stand Up Meeting"
       ],
       color: "bg-red-500"
     }
@@ -128,9 +151,6 @@ const Experience = () => {
                       <div className="animate-slide-right">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 hover:text-blue-600 transition-colors duration-300">{exp.title}</h3>
                         <h4 className="text-xl font-semibold text-blue-600 mb-2 hover:text-blue-800 transition-colors duration-300">{exp.company}</h4>
-                        {exp.clients && (
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 animate-fade-in">Clients: {exp.clients}</p>
-                        )}
                         {exp.project && (
                           <p className="text-sm text-gray-600 dark:text-gray-400 mb-2 animate-fade-in">Project: {exp.project}</p>
                         )}
